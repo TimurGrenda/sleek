@@ -2,6 +2,12 @@
 
 All notable changes to sleek will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Priority picker in the todo dialog now has buttons to raise/lower the priority (wrapping at the ends) and to clear it
+
 ## [2.0.25] - 2026-04-14
 
 ### Added

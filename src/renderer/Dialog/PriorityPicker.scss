@@ -1,3 +1,19 @@
 #priorityPicker {
-  width: 5.5em;
+  display: flex;
+  // Stretch so the buttons match the height of the filled fields
+  // (Priority dropdown, Due, Threshold, …) instead of floating mid-row.
+  align-items: stretch;
+  gap: 0.25em;
+
+  .priorityPickerSelect {
+    width: 5.5em;
+  }
+
+  // The buttons sit interspersed with the dropdown (lower | dropdown | clear |
+  // raise), so each gets its own filled surface that matches the surrounding
+  // inputs' background and corner radius (--radius == MUI shape.borderRadius).
+  .MuiIconButton-root {
+    border-radius: var(--radius);
+    background: var(--mui-palette-action-hover, rgba(0, 0, 0, 0.06));
+  }
 }
