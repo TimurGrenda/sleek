@@ -7,6 +7,7 @@ All notable changes to sleek will be documented in this file. The format is base
 ### Added
 
 - Priority picker in the todo dialog now has buttons to raise/lower the priority (wrapping at the ends) and to clear it
+- `pacman` Linux build target plus a `build:pacman` npm script, and README instructions for building the Arch Linux package and installing it (including the `pacman -U -dd` workaround for false-positive dependency errors)
 
 ## [2.0.25] - 2026-04-14
 

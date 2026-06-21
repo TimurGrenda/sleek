@@ -43,6 +43,7 @@
     "format:write": "npx prettier . --write",
     "build": "npm run peggy && electron-vite build",
     "build:unpack": "npm run build && electron-builder --dir",
+    "build:pacman": "npm run build && electron-builder --linux pacman",
     "build:mas": "npm run build && electron-builder build -m mas --universal --publish never",
     "build:masdev": "npm run build && electron-builder build -m mas-dev --publish never",
     "postinstall": "electron-builder install-app-deps",
