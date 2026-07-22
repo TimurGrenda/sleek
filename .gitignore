@@ -111,8 +111,6 @@ yarn.lock
 
 opencode.json
 
-AGENTS.md
-
 ARCHITECTURE.md
 
 wiki/
@@ -120,3 +118,5 @@ wiki/
 test-results/
 
 playwright-report/
+
+sleek.wiki/
