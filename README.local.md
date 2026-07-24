@@ -58,6 +58,14 @@ sudo pacman -U -dd sleek-2.0.26-linux-x64.pacman
 
 Once installed, launch sleek from your application menu or by running `sleek`.
 
+### Fork feature: priority stepper buttons
+
+The priority picker in the todo dialog is a stepper instead of a plain dropdown:
+`◀ | value | ✕ | ▶`. The chevrons step through `- → C → B → A` and wrap around at
+both ends, `✕` clears the priority (disabled when already `-`). The dropdown is
+kept but trimmed to `A`, `B`, `C`, `-` — the full A–Z alphabet is gone, since
+todo.txt priorities beyond `C` are rarely useful in practice.
+
 ### Fork feature: new todos inherit the selected project filter
 
 Opt-in via **Settings → "New todos inherit selected project filters"** (disabled by
