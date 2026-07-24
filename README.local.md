@@ -57,3 +57,11 @@ sudo pacman -U -dd sleek-2.0.26-linux-x64.pacman
 > package installs.
 
 Once installed, launch sleek from your application menu or by running `sleek`.
+
+### Fork feature: new todos inherit the selected project filter
+
+Opt-in via **Settings → "New todos inherit selected project filters"** (disabled by
+default). When enabled and one or more projects are selected in the Filters drawer,
+the new-todo dialog opens prefilled with ` +<project>` for every selected
+(non-excluded) project, with the cursor at the start — typing `text` yields
+`text +<project>`. Editing an existing todo is unaffected.

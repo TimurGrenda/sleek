@@ -35,6 +35,14 @@ export function IsExcluded(attribute, filters: Filters | null) {
   return false;
 }
 
+// Prefix for new todos: one " +project" per selected (non-excluded) project filter
+export const SelectedProjectsPrefix = (filters: Filters | null): string =>
+  (filters?.projects ?? [])
+    .filter((filter) => !filter.exclude)
+    .flatMap((filter) => filter.value)
+    .map((project) => ` +${project}`)
+    .join("");
+
 export const HandleFilterSelect = (
   key: AttributeKey,
   value: string[],

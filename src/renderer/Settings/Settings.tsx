@@ -71,6 +71,9 @@ const visibleSettings: VisibleSettings = {
     style: "toggle",
     help: "https://github.com/ransome1/sleek/wiki/Multi%E2%80%90line-text-field#bulk-todo-creation",
   },
+  prefillProjectFilters: {
+    style: "toggle",
+  },
   matomo: {
     style: "toggle",
     help: "https://github.com/ransome1/sleek/blob/main/PRIVACY.md",
@@ -198,11 +201,11 @@ const SettingsComponent: React.FC<SettingsComponentProps> = memo(
                   control={
                     <Switch
                       data-testid={`setting-toggle-${settingName}`}
-                      checked={
-                        (settings[
-                          settingName as keyof SettingStore
-                        ] as boolean) ?? false
-                      }
+                      // Boolean() keeps the Switch controlled for settings
+                      // absent from older configs (e.g. prefillProjectFilters)
+                      checked={Boolean(
+                        settings[settingName as keyof SettingStore],
+                      )}
                       onChange={(event) =>
                         store.setConfig(settingName, event.target.checked)
                       }

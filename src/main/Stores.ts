@@ -144,6 +144,9 @@ const migrations = {
   "2.0.26": (config) => {
     console.log("Migrating settings store from 2.0.19 → 2.0.26");
     config.delete("customStylesPath");
+    // Fork setting; only reaches configs not yet migrated to 2.0.26, so the
+    // renderer must also treat a missing key as false
+    config.set("prefillProjectFilters", false);
   },
   "2.0.27-rc.2": (config) => {
     console.log("Migrating settings store from 2.0.26 → 2.0.27-rc.2");

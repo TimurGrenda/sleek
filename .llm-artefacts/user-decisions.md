@@ -1,5 +1,12 @@
 # User Decisions
 
+## 2026-07-23 — Prefill new-todo input with selected project filter
+
+- With multiple project filters selected, prefill **all** non-excluded projects
+  (`" +A +B"`), not just a single one.
+- Do **not** edit existing documentation files (README.md etc.). Document local/fork
+  changes in `README.local.md` instead.
+
 ## 2026-06-21 — Installing the pacman package
 
 - When installing the built `.pacman` package with `sudo pacman -U`, an error about

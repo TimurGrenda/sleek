@@ -11,7 +11,8 @@ import DatePicker from "./DatePicker";
 import PomodoroPicker from "./PomodoroPicker";
 import RecurrencePicker from "../Picker/RecurrencePicker";
 import "./Dialog.scss";
-import { Attributes, SettingStore, TodoObject } from "../../@types";
+import { SelectedProjectsPrefix } from "../Shared";
+import { Attributes, Filters, SettingStore, TodoObject } from "../../@types";
 
 const { ipcRenderer } = window.api;
 
@@ -21,6 +22,7 @@ interface DialogComponentProps {
   todoObject: TodoObject | null;
   setTodoObject: React.Dispatch<React.SetStateAction<TodoObject | null>>;
   attributes: Attributes | null;
+  filters: Filters;
   attributeFields: TodoObject | null;
   setAttributeFields: React.Dispatch<React.SetStateAction<TodoObject | null>>;
   onNotification: React.Dispatch<SnackbarAction>;
@@ -34,17 +36,26 @@ const DialogComponent: React.FC<DialogComponentProps> = memo(
     todoObject,
     setTodoObject,
     attributes,
+    filters,
     attributeFields,
     setAttributeFields,
     onNotification,
     settings,
   }) => {
+    // If enabled in settings, new todos inherit the currently selected
+    // (non-excluded) project filters
+    const prefilledProjects =
+      !todoObject && settings.prefillProjectFilters
+        ? SelectedProjectsPrefix(filters)
+        : "";
+
     const [priority, setPriority] = useState<string>("-");
     const [dueDate, setDueDate] = useState<string | null>(null);
     const [thresholdDate, setThresholdDate] = useState<string | null>(null);
     const [recurrence, setRecurrence] = useState<string | null>(null);
     const [pomodoro, setPomodoro] = useState<number | string>(0);
-    const [textFieldValue, setTextFieldValue] = useState<string>("");
+    const [textFieldValue, setTextFieldValue] =
+      useState<string>(prefilledProjects);
     const numRowsWithContent = textFieldValue
       ?.split("\n")
       .filter((line) => line.trim() !== "").length;
@@ -169,7 +180,7 @@ const DialogComponent: React.FC<DialogComponentProps> = memo(
 
     useEffect(() => {
       if (dialogOpen) {
-        setTextFieldValue(todoObject?.string || "");
+        setTextFieldValue(todoObject?.string || prefilledProjects);
       }
     }, [dialogOpen]);
 
@@ -186,6 +197,7 @@ const DialogComponent: React.FC<DialogComponentProps> = memo(
             textFieldValue={textFieldValue}
             setTextFieldValue={setTextFieldValue}
             attributes={attributes}
+            cursorAtStart={Boolean(prefilledProjects)}
           />
           <PriorityPicker priority={priority} handleChange={handleChange} />
           <DatePicker

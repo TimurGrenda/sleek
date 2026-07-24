@@ -11,6 +11,8 @@ export interface SettingStore {
   convertRelativeToAbsoluteDates: boolean;
   useHumanFriendlyDates: boolean;
   bulkTodoCreation: boolean;
+  // Optional: absent (undefined = disabled) in configs migrated before the fork added it
+  prefillProjectFilters?: boolean;
   weekStart: 1 | 6 | 0;
   language: string;
 

@@ -16,12 +16,14 @@ interface AutoSuggestComponentProps {
   textFieldValue: string;
   setTextFieldValue: React.Dispatch<React.SetStateAction<string>>;
   attributes: Attributes | null;
+  cursorAtStart?: boolean;
 }
 
 const AutoSuggestComponent: React.FC<AutoSuggestComponentProps> = ({
   textFieldValue,
   setTextFieldValue,
   attributes,
+  cursorAtStart,
 }) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [prefix, setPrefix] = useState<string | null>(null);
@@ -178,6 +180,10 @@ const AutoSuggestComponent: React.FC<AutoSuggestComponentProps> = ({
 
   useEffect(() => {
     textFieldRef.current?.focus();
+    if (cursorAtStart) {
+      // Prefilled " +project" value: typing should land before the tag
+      textFieldRef.current?.setSelectionRange(0, 0);
+    }
   }, [textFieldRef]);
 
   return (

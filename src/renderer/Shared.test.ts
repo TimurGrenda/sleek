@@ -1,7 +1,7 @@
 import { expect, describe, it } from "vitest";
 import { DateTime, Settings as LuxonSettings, WeekdayNumbers } from "luxon";
-import { friendlyDate } from "./Shared";
-import { SettingStore } from "@sleek-types";
+import { friendlyDate, SelectedProjectsPrefix } from "./Shared";
+import { Filters, SettingStore } from "@sleek-types";
 import { i18n } from "./Settings/LanguageSelector";
 
 // Mock translation function
@@ -15,6 +15,26 @@ const mockSettings: SettingStore = {
   language: "en",
   weekStart: 1, // Monday
 };
+
+describe("SelectedProjectsPrefix", () => {
+  it("returns empty string when no filters are set", () => {
+    expect(SelectedProjectsPrefix(null)).toBe("");
+    expect(SelectedProjectsPrefix({} as Filters)).toBe("");
+  });
+
+  it("prefixes every selected project and skips excluded ones", () => {
+    const filters = {
+      projects: [
+        { value: ["ProjectA"], exclude: false, groupedName: null },
+        { value: ["ProjectB", "ProjectC"], exclude: false, groupedName: "BC" },
+        { value: ["Hidden"], exclude: true, groupedName: null },
+      ],
+    } as Filters;
+    expect(SelectedProjectsPrefix(filters)).toBe(
+      " +ProjectA +ProjectB +ProjectC",
+    );
+  });
+});
 
 describe("friendlyDate", () => {
   // Helper to get dates relative to today

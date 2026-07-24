@@ -181,6 +181,7 @@ const App = (): JSX.Element => {
               dialogOpen={dialogOpen}
               setDialogOpen={setDialogOpen}
               attributes={attributes}
+              filters={filters}
               attributeFields={attributeFields}
               setAttributeFields={setAttributeFields}
               onNotification={dispatchSnackbar}
