@@ -15,6 +15,4 @@ pnpm run build:pacman
 package=$(ls --sort=time dist/sleek-*-linux-x64.pacman | head --lines=1)
 
 # --upgrade: install from a local package file
-# fallback --nodeps --nodeps (= -dd): also skip dependency *version* checks — needed for
-# the false-positive http-parser dependency (Electron bundles its runtime libs)
-sudo pacman --upgrade "$package" || sudo pacman --upgrade --nodeps --nodeps "$package"
+sudo pacman --upgrade "$package"

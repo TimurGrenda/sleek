@@ -43,18 +43,10 @@ Copy the `.pacman` file to the target machine and install it with `pacman -U`:
 sudo pacman -U sleek-2.0.26-linux-x64.pacman
 ```
 
-If `pacman` aborts with an unresolvable dependency error (for example a missing or
-version-mismatched `http-parser`, which Electron's bundled runtime does not actually
-need), install while skipping the dependency version checks:
-
-```sh
-sudo pacman -U -dd sleek-2.0.26-linux-x64.pacman
-```
-
-> `-dd` tells pacman to skip **all** dependency version/availability checks. Use it
-> only for this self-contained Electron package — its runtime libraries are bundled,
-> so the flagged dependency is a false positive. Do not use `-dd` for general system
-> package installs.
+The Arch dependency list explicitly excludes electron-builder's obsolete
+`http-parser` requirement. If an older package still requests it, rebuild the
+package with this configuration and install again. Keep normal dependency checks
+enabled: Electron still needs system libraries such as GTK and NSS.
 
 Once installed, launch sleek from your application menu or by running `sleek`.
 

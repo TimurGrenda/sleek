@@ -116,3 +116,20 @@ linux:
       arch:
         - arm64
         - x64
+pacman:
+  # Override electron-builder's defaults: bundled Electron does not link to
+  # http-parser, which is no longer available on the target Arch system.
+  depends:
+    - c-ares
+    - ffmpeg
+    - gtk3
+    - libevent
+    - libvpx
+    - libxslt
+    - libxss
+    - minizip
+    - nss
+    - re2
+    - snappy
+    - libnotify
+    - libappindicator-gtk3

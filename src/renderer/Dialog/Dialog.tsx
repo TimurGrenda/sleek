@@ -94,7 +94,21 @@ const DialogComponent: React.FC<DialogComponentProps> = memo(
     const handleKeyDown = (
       event: React.KeyboardEvent<HTMLDivElement>,
     ): void => {
-      if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+      if (
+        event.key !== "Enter" ||
+        event.defaultPrevented ||
+        event.nativeEvent.isComposing ||
+        event.nativeEvent.keyCode === 229
+      ) {
+        return;
+      }
+
+      const isPlainEnterInEditor =
+        event.target instanceof HTMLTextAreaElement &&
+        !event.shiftKey &&
+        !event.altKey;
+
+      if (event.ctrlKey || event.metaKey || isPlainEnterInEditor) {
         event.preventDefault();
         event.stopPropagation();
         handleAdd();
